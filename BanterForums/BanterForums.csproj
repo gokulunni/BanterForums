@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BanterForums.Data\BanterForums.Data.csproj" />
+    <ProjectReference Include="..\BanterForums.Service\BanterForums.Service.csproj" />
   </ItemGroup>
 
 </Project>

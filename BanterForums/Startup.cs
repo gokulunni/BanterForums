@@ -14,6 +14,7 @@ using BanterForums.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BanterForums.Data.Models;
+using BanterForums.Service;
 
 namespace BanterForums
 {
@@ -44,6 +45,7 @@ namespace BanterForums
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddScoped<IForum, ForumService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
