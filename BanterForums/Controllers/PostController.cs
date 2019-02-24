@@ -62,24 +62,25 @@ namespace BanterForums.Controllers
         public async Task<IActionResult> AddPost(NewPostModel model)
         {
             var userId = _userManager.GetUserId(User);
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = _userManager.FindByIdAsync(userId).Result; //result extension ensues user is not null by waiting for a result
             var post = BuildPost(model, user);
 
-            await _postService.Add(post);
+             _postService.Add(post).Wait(); //Blocks the current thread and waits until the task is complete
+
             //TO DO: User rating management
 
-            return RedirectToAction("Index", "Post", post.Id);
+            return RedirectToAction("Index", "Post", new { id = post.Id });
         }
 
         private Post BuildPost(NewPostModel model, ApplicationUser user)
         {
+            var forum = _forumService.GetById(model.ForumId);
             return new Post
             {
                 Title = model.Title,
                 Content = model.Content,
                 Created = DateTime.Now,
                 User = user
-
             };
         }
 
