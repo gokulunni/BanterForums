@@ -80,7 +80,9 @@ namespace BanterForums.Controllers
                 Title = model.Title,
                 Content = model.Content,
                 Created = DateTime.Now,
-                User = user
+                User = user,
+                Forum = forum
+                
             };
         }
 
